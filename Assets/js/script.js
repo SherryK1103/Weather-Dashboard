@@ -1,8 +1,10 @@
 function handleSearch() {
     const searchInput = document.getElementById('searchInput');
     const city = searchInput.value;
-   
-    const mapUrl = `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=${fb76df9a3f66718bed25c952ed121f1b}`;
+    
+    var apiMapKey = 'fb76df9a3f66718bed25c952ed121f1b'
+
+    const mapUrl = `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=${apiMapKey}`;
   
     fetch(mapUrl)
       .then(response => response.json())
