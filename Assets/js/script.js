@@ -43,7 +43,7 @@ function handleSearch() {
     const apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d';
     const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${5b17d158e4ae1c29c8841402bf27bc4d}`;
   
-    return fetch(goeUrl)
+    return fetch(geoUrl)
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
