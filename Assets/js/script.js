@@ -1,11 +1,15 @@
 // 1. function should be handleSearch
 // 2. geocoding function
-// 3. fetch weather  function, change what I have in handlesearch now to fetchweather.
+// 3. fetch weather  function, change what I have in handlesearch now to fetchweather. Line 15 - i am grabbing the first one. 
 
 
 function getGeocodingData(city) {
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q={city name},${state code},${country code}&limit=${limit}&appid={5b17d158e4ae1c29c8841402bf27bc4d}`;
+    
+  var apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
+
+  const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiGeoKey}`;
   // hard code the limit, just hard code it for this project. openweather has country code info. 
+
     return fetch(geoUrl)
       .then(response => response.json())
       .then(data => {
