@@ -2,10 +2,15 @@
 // 2. geocoding function
 // 3. fetch weather  function, change what I have in handlesearch now to fetchweather. Line 15 - i am grabbing the first one. 
 
+function handleSearch()
+
+  // const searchButton = document.getElementById('searchButton');
+  // searchButton.addEventListener('click', handleSearch);
 
 function getGeocodingData(city) {
     
   var apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
+  var limit = 5;
 
   const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiGeoKey}`;
   // hard code the limit, just hard code it for this project. openweather has country code info. 
@@ -16,15 +21,13 @@ function getGeocodingData(city) {
         if (data.length > 0) {
           const latitude = data[0].lat;
           const longitude = data[0].lon;
-          return { latitude, longitude }; // instead of returning lat & lon call fetchWeather function that I will write, how do you call a function? fetchweather(lat,lon); 
+          fetchWeather(latitude,longitude);
+          // instead of returning lat & lon call fetchWeather function that I will write, how do you call a function? fetchweather(lat,lon); 
         } else {
           throw new Error('No coordinates found for the specified city.');
         }
       });
   }
-
-
-
 
 function fetchWeather(lat, lon) {
     const searchInput = document.getElementById('searchInput');
@@ -42,9 +45,6 @@ function fetchWeather(lat, lon) {
       .catch(error => {
         console.error(error);
       });
+
+
   }
-  
-  // const searchButton = document.getElementById('searchButton');
-  // searchButton.addEventListener('click', handleSearch);
-  
- 
