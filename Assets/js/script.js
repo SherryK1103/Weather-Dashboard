@@ -1,4 +1,4 @@
-// 1. function should be handleSearch
+// 1. First function should be handleSearch
 // 2. geocoding function
 // 3. fetch weather  function, change what I have in handlesearch now to fetchweather. Line 15 - i am grabbing the first one. 
 
@@ -26,7 +26,7 @@ function getGeocodingData(city) {
 
 
 
-function handleSearch(lat, lon) {
+function fetchWeather(lat, lon) {
     const searchInput = document.getElementById('searchInput');
     const city = searchInput.value;
     
@@ -44,7 +44,7 @@ function handleSearch(lat, lon) {
       });
   }
   
-  const searchButton = document.getElementById('searchButton');
-  searchButton.addEventListener('click', handleSearch);
+  // const searchButton = document.getElementById('searchButton');
+  // searchButton.addEventListener('click', handleSearch);
   
  
