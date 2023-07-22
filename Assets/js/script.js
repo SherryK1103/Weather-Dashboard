@@ -10,13 +10,25 @@ function handleSearch() {
     alert('Please enter a city name.');
     return;
   }
-
   getGeocodingData(city)
-
 }
 
-function currentDay()
+function currentDay(weatherData, city, timezone) {
 // create card and get data to show up
+  const tempElement = document.getElementById('temp');
+  const windElement = document.getElementById('wind');
+  const humidityElement = document.getElementById('humidity');
+
+  // Extracting the relevant data from the weatherData object
+  const temperature = weatherData.main.temp;
+  const windSpeed = weatherData.wind.speed;
+  const humidity = weatherData.main.humidity;
+
+  // Updating the HTML content with the current day's weather information
+  tempElement.textContent = `Temperature in ${city}: ${temperature} °F`;
+  windElement.textContent = `Wind Speed: ${windSpeed} m/s`;
+  humidityElement.textContent = `Humidity: ${humidity}%`;
+}
 
 function renderForecast(forecast) {
   // create cards & get data to show up
@@ -55,7 +67,7 @@ function fetchWeather(location) {
     
     var apiMapKey = 'fb76df9a3f66718bed25c952ed121f1b'
 
-    const mapUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiMapKey}`;
+    const mapUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiMapKey}&units=imperial`;
   
     fetch(mapUrl)
       .then(response => response.json())
@@ -69,7 +81,10 @@ function fetchWeather(location) {
   }
 
 function sharedData(data,city) {
-  currentDay(data.list[0],city,data.city.timezone);
-  renderForecast(data.list);
+  const currentDayData = (data.list[0]);
+  const forecastData = data.list.slice(1);
+
+  currentDay(currentDayData, city, data.city.timezone);
+  renderForecast(forecastData);
 }
 
