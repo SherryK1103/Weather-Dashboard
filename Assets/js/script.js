@@ -12,37 +12,46 @@ function handleSearch() {
   }
 
   getGeocodingData(city)
-  
+
 }
 
+function currentDay()
+// create card and get data to show up
+
+function renderForecast(forecast) {
+  // create cards & get data to show up
+}
 
 const searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', handleSearch);
 
 function getGeocodingData(city) {
     var apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
-    var limit = 5;
+   // var limit = 5;
 
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiGeoKey}`;
+    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiGeoKey}`;
   // hard code the limit, just hard code it for this project.
 
-    return fetch(geoUrl)
+    fetch(geoUrl)
       .then(response => response.json())
       .then(data => {
-        if (data.length > 0) {
-          const latitude = data[0].lat;
-          const longitude = data[0].lon;
-          fetchWeather(latitude,longitude);
+        console.log(data);
+        // if (data.length > 0) {
+          // const latitude = data[0].lat;
+          // const longitude = data[0].lon;
+          fetchWeather(data[0]);
           // instead of returning lat & lon call fetchWeather function that I will write, how do you call a function? fetchweather(lat,lon); 
-        } else {
-          throw new Error('No coordinates found for the specified city.');
-        }
+        // } else {
+        //  throw new Error('No coordinates found for the specified city.');
+       // }
       });
   }
 
-function fetchWeather(lat, lon) {
-    const searchInput = document.getElementById('searchInput');
-    const city = searchInput.value;
+function fetchWeather(location) {
+   // const searchInput = document.getElementById('searchInput');
+    const city = location.name;
+    console.log(city);
+    const {lat,lon} = location;
     
     var apiMapKey = 'fb76df9a3f66718bed25c952ed121f1b'
 
@@ -52,8 +61,15 @@ function fetchWeather(lat, lon) {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+      sharedData(data,city)
       })
       .catch(error => {
         console.error(error);
       });
   }
+
+function sharedData(data,city) {
+  currentDay(data.list[0],city,data.city.timezone);
+  renderForecast(data.list);
+}
+
