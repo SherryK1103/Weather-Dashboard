@@ -1,7 +1,3 @@
-// 1. First function should be handleSearch
-// 2. geocoding function
-// 3. fetch weather  function, change what I have in handlesearch now to fetchweather. Line 15 - i am grabbing the first one. 
-
 function handleSearch() {
   const searchInput = document.getElementById('searchInput');
   const city = searchInput.value.trim();
@@ -10,7 +6,36 @@ function handleSearch() {
     alert('Please enter a city name.');
     return;
   }
+
+  saveCityToLocalStorage(city);
+
   getGeocodingData(city)
+}
+
+function saveCityToLocalStorage(city) {
+  let previousCities = localStorage.getItem('previousCities') || '[]';
+  previousCities = JSON.parse(previousCities);
+
+  // Add the new city to the list of prvious cities (remove duplicates)
+  if (!previousCities.includes(city)) {
+    previousCities.push(city);
+  }
+
+  // Save the updated list back to localStorage
+  localStorage.setItem('previousCities', JSON.stringify(previousCities));
+}
+
+// Function to populate previous searches on the webpage
+function populatePreviousSearches() {
+  const previousCities = JSON.parse(localStorage.getItem('previousCities')) || [];
+
+  const previousSearchesElement = document.getElementById('previousSearches');
+
+  previousCities.forEach(city => {
+    const listItem = document.createElement('li');
+    listItem.textContent = city;
+    previousSearchesElement.appendChild(listItem);
+  });
 }
 
 function currentDay(weatherData, city, timezone) {
