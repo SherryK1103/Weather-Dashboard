@@ -58,7 +58,13 @@ function currentDay(weatherData, city) {
 
 function renderForecast(forecast) {
   // create cards & get data to show up
- 
+  const forecastSection = document.getElementById('5-day');
+
+  forecastSection.innerHTML = '';
+
+  for (let i = 0; i < forecast.length; i++) {
+    const dayData = forecast[i];
+  }
   }
 
 
@@ -99,6 +105,7 @@ function fetchWeather(location) {
       });
   }
 
+  // Line 113 calls currentDay function detailed above in line 42
 function sharedData(data,city) {
   const currentDayData = (data.list[0]);
   //const forecastData = data.list.slice(1);
