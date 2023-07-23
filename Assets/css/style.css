@@ -1,8 +1,4 @@
-body {
-    background-color: pink;
-}
-
-#5-day {
+#five-day {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -15,6 +11,10 @@ body {
     border: 1px solid #ccc;
     margin-bottom: 10px;
     text-align: center;
+    max-width: 15%;
+    background-color: lightpink;
+    color: black; 
+    font-weight: bold;
 }
 
 .forecast-card p {
@@ -24,4 +24,8 @@ body {
 .forecast-card img {
     width: 50px;
     height: 50px;
+}
+
+#todayContainer {
+    width: 100px;
 }

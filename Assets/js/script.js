@@ -56,29 +56,41 @@ function currentDay(weatherData, city) {
   humidityEl.textContent = `Humidity: ${humidity}%`;
 }
 
-// This is where I will render the 5-day forecast
+// This is where I will render the five-day forecast
 function renderForecast(forecast) {
   // create cards & get data to show up
-  const forecastSection = document.getElementById('5-day');
+  const forecastSection = document.getElementById('five-day');
   forecastSection.innerHTML = '';
 
-  for (let i = 0; i < forecast.length; i++) {
-    const dayData = forecast[i];
+  // Filtering out duplicate results for each date
+  const uniqueDates = forecast.reduce((dates, dayData) => {
+    const date = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'});
+    if (!dates.includes(date)) {
+      dates.push(date);
+    }
+    return dates;
+  }, []);
 
+  for (const date of uniqueDates) {
+    // Filtering forecast data for the current date
+    const forecastForDate = forecast.filter(dayData => {
+      const currentDate = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'});
+      return currentDate === date;
+    });
+  
     // Creating a forecast card element
     const cardEl = document.createElement('div');
     cardEl.classList.add('forecast-card');
 
     // Extracting the relevant data from dayData
-    const date = new Date(dayData.dt_txt);
-    const temperature = dayData.main.temp;
-    const weatherDesc = dayData.weather[0].description;
-    const iconCode = dayData.weather[0].icon;
+    const temperature = forecastForDate[0].main.temp;
+    const weatherDesc = forecastForDate[0].weather[0].description;
+    const iconCode = forecastForDate[0].weather[0].icon;
     const iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
 
     // Creating and populating the elements inside the card
     const dateEl = document.createElement('p');
-    dateEl.textContent = date.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'});
+    dateEl.textContent = date;
   
     const temperatureEl = document.createElement('p');
     temperatureEl.textContent = `Temperature: ${temperature} °F`;
