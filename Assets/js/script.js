@@ -64,7 +64,7 @@ function renderForecast(forecast) {
 
   // Filtering out duplicate results for each date
   const uniqueDates = forecast.reduce((dates, dayData) => {
-    const date = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'});
+    const date = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'});
     if (!dates.includes(date)) {
       dates.push(date);
     }
@@ -74,7 +74,7 @@ function renderForecast(forecast) {
   for (const date of uniqueDates) {
     // Filtering forecast data for the current date
     const forecastForDate = forecast.filter(dayData => {
-      const currentDate = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'});
+      const currentDate = new Date(dayData.dt_txt).toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'});
       return currentDate === date;
     });
   
