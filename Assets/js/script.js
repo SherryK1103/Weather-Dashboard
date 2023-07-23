@@ -27,7 +27,7 @@ function populatePreviousSearches() {
 
   const previousSearchesElement = document.getElementById('previousSearches');
 
-  //previousSearchesElement.innerHTML = '';
+  previousSearchesElement.innerHTML = '';
 
   previousCities.forEach(city => {
     const listItem = document.createElement('li');
