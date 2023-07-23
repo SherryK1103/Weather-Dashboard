@@ -25,14 +25,14 @@ function saveCityToLocalStorage(city) {
 function populatePreviousSearches() {
   const previousCities = JSON.parse(localStorage.getItem('previousCities')) || [];
 
-  const previousSearchesElement = document.getElementById('previousSearches');
+  const previousSearchesEl = document.getElementById('previousSearches');
 
-  previousSearchesElement.innerHTML = '';
+  previousSearchesEl.innerHTML = '';
 
   previousCities.forEach(city => {
     const listItem = document.createElement('li');
     listItem.textContent = city;
-    previousSearchesElement.appendChild(listItem);
+    previousSearchesEl.appendChild(listItem);
   });
 }
 
@@ -41,9 +41,9 @@ populatePreviousSearches();
 
 function currentDay(weatherData, city) {
 // create card and get data to show up
-  const tempElement = document.getElementById('temp');
-  const windElement = document.getElementById('wind');
-  const humidityElement = document.getElementById('humidity');
+  const tempEl = document.getElementById('temp');
+  const windEl = document.getElementById('wind');
+  const humidityEl = document.getElementById('humidity');
 
   // Extracting the relevant data from the weatherData object
   const temperature = weatherData.main.temp;
@@ -51,22 +51,55 @@ function currentDay(weatherData, city) {
   const humidity = weatherData.main.humidity;
 
   // Updating the HTML content with the current day's weather information
-  tempElement.textContent = `Temperature in ${city}: ${temperature} °F`;
-  windElement.textContent = `Wind Speed: ${windSpeed} m/s`;
-  humidityElement.textContent = `Humidity: ${humidity}%`;
+  tempEl.textContent = `Temperature in ${city}: ${temperature} °F`;
+  windEl.textContent = `Wind Speed: ${windSpeed} m/s`;
+  humidityEl.textContent = `Humidity: ${humidity}%`;
 }
 
+// This is where I will render the 5-day forecast
 function renderForecast(forecast) {
   // create cards & get data to show up
   const forecastSection = document.getElementById('5-day');
-
   forecastSection.innerHTML = '';
 
   for (let i = 0; i < forecast.length; i++) {
     const dayData = forecast[i];
-  }
-  }
 
+    // Creating a forecast card element
+    const cardEl = document.createElement('div');
+    cardEl.classList.add('forecast-card');
+
+    // Extracting the relevant data from dayData
+    const date = new Date(dayData.dt_txt);
+    const temperature = dayData.main.temp;
+    const weatherDesc = dayData.weather[0].description;
+    const iconCode = dayData.weather[0].icon;
+    const iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
+
+    // Creating and populating the elements inside the card
+    const dateEl = document.createElement('p');
+    dateEl.textContent = date.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'});
+  
+    const temperatureEl = document.createElement('p');
+    temperatureEl.textContent = `Temperature: ${temperature} °F`;
+    
+    const weatherDescEl = document.createElement('p');
+    weatherDescEl.textContent = `Weather: ${weatherDesc}`;
+
+    const weatherIconEl = document.createElement('img');
+    weatherIconEl.src = iconUrl;
+    weatherIconEl.alt = weatherDesc;
+  
+    // Appending the elements to the card
+    cardEl.appendChild(dateEl);
+    cardEl.appendChild(temperatureEl);
+    cardEl.appendChild(weatherDescEl);
+    cardEl.appendChild(weatherIconEl);
+
+    // Append the card to the forecast section
+    forecastSection.appendChild(cardEl);  
+    }
+  }
 
 const searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', handleSearch);
@@ -108,9 +141,10 @@ function fetchWeather(location) {
   // Line 113 calls currentDay function detailed above in line 42
 function sharedData(data,city) {
   const currentDayData = (data.list[0]);
-  //const forecastData = data.list.slice(1);
+  const forecastData = data.list.slice(1);
 
   currentDay(currentDayData, city, data.city.timezone);
-  //renderForecast(forecastData);
+  //renderForecast(data);
+  renderForecast(forecastData);
 }
 
