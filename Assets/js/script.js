@@ -30,8 +30,10 @@ function populatePreviousSearches() {
   previousSearchesEl.innerHTML = '';
 
   previousCities.forEach(city => {
-    const listItem = document.createElement('li');
+    const listItem = document.createElement('div');
+    listItem.classList.add('previous-searches');
     listItem.textContent = city;
+    listItem.addEventListener('click', () => handlePreviousSearch(city));
     previousSearchesEl.appendChild(listItem);
   });
 }
