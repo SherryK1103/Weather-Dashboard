@@ -31,11 +31,17 @@ function populatePreviousSearches() {
 
   previousCities.forEach(city => {
     const listItem = document.createElement('div');
-    listItem.classList.add('previous-searches');
+    listItem.classList.add('search-history-item');
     listItem.textContent = city;
-    listItem.addEventListener('click', () => handlePreviousSearch(city));
     previousSearchesEl.appendChild(listItem);
+
+    // Event listener to each search history item
+    listItem.addEventListener('click', () => handlePreviousSearch(city));
   });
+}
+
+function handlePreviousSearch(city) {
+  getGeocodingData(city);
 }
 
 // Call the function to populate previous searches when the page loads
