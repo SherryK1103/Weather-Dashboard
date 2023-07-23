@@ -6,21 +6,17 @@ function handleSearch() {
     alert('Please enter a city name.');
     return;
   }
-
   saveCityToLocalStorage(city);
-
-  getGeocodingData(city)
+  getGeocodingData(city);
 }
 
 function saveCityToLocalStorage(city) {
   let previousCities = localStorage.getItem('previousCities') || '[]';
   previousCities = JSON.parse(previousCities);
-
   // Add the new city to the list of previous cities
   if (!previousCities.includes(city)) {
     previousCities.push(city);
   }
-
   // Save the updated list back to localStorage
   localStorage.setItem('previousCities', JSON.stringify(previousCities));
 }
@@ -31,7 +27,7 @@ function populatePreviousSearches() {
 
   const previousSearchesElement = document.getElementById('previousSearches');
 
-  previousSearchesElement.innerHTML = '';
+  //previousSearchesElement.innerHTML = '';
 
   previousCities.forEach(city => {
     const listItem = document.createElement('li');
@@ -43,7 +39,7 @@ function populatePreviousSearches() {
 // Call the function to populate previous searches when the page loads
 populatePreviousSearches();
 
-function currentDay(weatherData, city, timezone) {
+function currentDay(weatherData, city) {
 // create card and get data to show up
   const tempElement = document.getElementById('temp');
   const windElement = document.getElementById('wind');
@@ -62,30 +58,23 @@ function currentDay(weatherData, city, timezone) {
 
 function renderForecast(forecast) {
   // create cards & get data to show up
-}
+ 
+  }
+
 
 const searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', handleSearch);
 
 function getGeocodingData(city) {
-    var apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
-   // var limit = 5;
+    const apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
 
     const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiGeoKey}`;
-  // hard code the limit, just hard code it for this project.
-
+  
     fetch(geoUrl)
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // if (data.length > 0) {
-          // const latitude = data[0].lat;
-          // const longitude = data[0].lon;
-          fetchWeather(data[0]);
-          // instead of returning lat & lon call fetchWeather function that I will write, how do you call a function? fetchweather(lat,lon); 
-        // } else {
-        //  throw new Error('No coordinates found for the specified city.');
-       // }
+        fetchWeather(data[0]);
       });
   }
 
@@ -95,7 +84,7 @@ function fetchWeather(location) {
     console.log(city);
     const {lat,lon} = location;
     
-    var apiMapKey = 'fb76df9a3f66718bed25c952ed121f1b'
+    const apiMapKey = 'fb76df9a3f66718bed25c952ed121f1b'
 
     const mapUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiMapKey}&units=imperial`;
   
@@ -112,9 +101,9 @@ function fetchWeather(location) {
 
 function sharedData(data,city) {
   const currentDayData = (data.list[0]);
-  const forecastData = data.list.slice(1);
+  //const forecastData = data.list.slice(1);
 
   currentDay(currentDayData, city, data.city.timezone);
-  renderForecast(forecastData);
+  //renderForecast(forecastData);
 }
 
