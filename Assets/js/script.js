@@ -48,25 +48,47 @@ function handlePreviousSearch(city) {
 populatePreviousSearches();
 
 function currentDay(weatherData, city) {
-// create card and get data to show up
-  const tempEl = document.getElementById('temp');
-  const windEl = document.getElementById('wind');
-  const humidityEl = document.getElementById('humidity');
+  const todayDataEl = document.getElementById('todayData');
 
   // Extracting the relevant data from the weatherData object
   const temperature = weatherData.main.temp;
   const windSpeed = weatherData.wind.speed;
   const humidity = weatherData.main.humidity;
+  const date = new Date();
 
-  // Updating the HTML content with the current day's weather information
-  tempEl.textContent = `Temperature in ${city}: ${temperature} °F`;
+  const iconCode = weatherData.weather[0].icon;
+  const iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
+
+  // Creating and populating the elements for Today's forecast
+  const dateEl = document.createElement('p');
+  dateEl.textContent = `Date: ${date.toLocaleDateString('en-US')}`;
+
+  // Creating and populating the elements for Today's forecast
+  const temperatureEl = document.createElement('p');
+  temperatureEl.textContent = `Temperature in ${city}: ${temperature}°F`;
+
+  const windEl = document.createElement('p');
   windEl.textContent = `Wind Speed: ${windSpeed} m/s`;
+
+  const humidityEl = document.createElement('p');
   humidityEl.textContent = `Humidity: ${humidity}%`;
+
+  // Weather icon element
+  const weatherIconEl = document.createElement('img');
+  weatherIconEl.src = iconUrl;
+  weatherIconEl.alt = 'Weather Icon';
+
+  // Clear the previous content and add the new data to the container
+  todayDataEl.innerHTML = '';
+  todayDataEl.appendChild(dateEl);
+  todayDataEl.appendChild(temperatureEl);
+  todayDataEl.appendChild(windEl);
+  todayDataEl.appendChild(humidityEl);
 }
 
-// This is where I will render the five-day forecast
+// Function to render the five-day forecast
 function renderForecast(forecast) {
-  // create cards & get data to show up
+  // create cards to display data
   const forecastSection = document.getElementById('five-day');
   forecastSection.innerHTML = '';
 

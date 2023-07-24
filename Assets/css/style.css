@@ -20,12 +20,20 @@ header {
     width: 100%;
 }
 
+#five-day-title {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 20px; 
+    margin-right: 500px;
+}
+
 .forecast-card {
     padding: 10px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
     margin-right: 10px;
-    text-align: center;
+    text-align: left;
     max-width: 10%;
     background-color: lightpink;
     color: black; 
@@ -37,7 +45,7 @@ header {
 }
 
 .forecast-card img {
-    width: 30px;
+    width: 50px;
     height: 50px;
 }
 
@@ -51,4 +59,23 @@ header {
     color: black;
     font-weight: bold;
     max-width: 200px;
+}
+
+#citySearch {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: x-large;
+}
+
+#todayContainer {
+    margin-bottom: 20px; /* Add some margin to separate the Today's forecast container from the 5-day forecast */
+  }
+  
+#todayData {
+    background-color: white;
+    border-color: black;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }

@@ -8,20 +8,19 @@
   </head>
   <body>
     <header>Weather Dashboard</header>
-    <div>Search for a City</div>
+    <div id="citySearch">Search for a City:</div>
     <div>
       <input type="text" id="searchInput" placeholder="Search" />
       <button id="searchButton">Search</button>
     </div>
+    <!-- Today's Forecast container -->
     <section id="todayContainer">
-      <h1 id="todayCast">Today's Forecast</h1>
-      <p id="temp"></p>
-      <p id="wind"></p>
-      <p id="humidity"></p>
+      <h1 id="todayCast">Today's Forecast:</h1>
+      <div id="todayData" class="forecast-card"></div>
     </section>
 
     <section>
-      <h2>5 Day Forecast</h2>
+      <h2 id="five-day-title">5 Day Forecast:</h2>
       <div id="five-day"></div>
     </section>
 
