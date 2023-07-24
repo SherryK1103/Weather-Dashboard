@@ -84,6 +84,7 @@ function currentDay(weatherData, city) {
   todayDataEl.appendChild(temperatureEl);
   todayDataEl.appendChild(windEl);
   todayDataEl.appendChild(humidityEl);
+  todayDataEl.appendChild(weatherIconEl);
 }
 
 // Function to render the five-day forecast
