@@ -150,7 +150,7 @@ searchButton.addEventListener('click', handleSearch);
 function getGeocodingData(city) {
     const apiGeoKey = '5b17d158e4ae1c29c8841402bf27bc4d'
 
-    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiGeoKey}`;
+    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiGeoKey}`;
   
     fetch(geoUrl)
       .then(response => response.json())
