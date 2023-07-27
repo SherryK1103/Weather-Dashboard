@@ -10,6 +10,9 @@ function handleSearch() {
   getGeocodingData(city);
 }
 
+// Call the function to populate previous searches when the page loads
+populatePreviousSearches();
+
 function saveCityToLocalStorage(city) {
   let previousCities = localStorage.getItem('previousCities') || '[]';
   previousCities = JSON.parse(previousCities);
@@ -43,9 +46,6 @@ function populatePreviousSearches() {
 function handlePreviousSearch(city) {
   getGeocodingData(city);
 }
-
-// Call the function to populate previous searches when the page loads
-populatePreviousSearches();
 
 function currentDay(weatherData, city) {
   const todayDataEl = document.getElementById('todayData');
