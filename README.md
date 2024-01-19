@@ -11,7 +11,7 @@ Git clone <paste SSH key>
 
 ## Deployed Link
 
-https://sherryk1103.github.io/Weather-Dashboard-06/
+https://sherryk1103.github.io/Weather-Dashboard/
 
 ## Usage
 
